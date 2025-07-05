@@ -1,0 +1,159 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+aaGRToolKit
+</name>
+</assembly>
+<members>
+<member name="T:aaGRToolKit.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:aaGRToolKit.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:aaGRToolKit.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="T:aaGRToolKit.aaTemplateData">
+ <summary>
+ Stores ArchestrA Galaxy template data in an XML serializable format.
+ </summary>
+</member>
+<member name="F:aaGRToolKit.aaTemplateData.SchemaVersion">
+ <summary>
+ The current XML schema version. This is useful in exports to determine 
+ if data may be missing from an older version export.
+ </summary>
+ <history>
+ 1.0 - Scripts only
+ 1.1 - Scripts and Attributes to two separate directories; added Discrete Field Attributes
+ 1.2 - Added version numbering to schema
+     - Added Analog Field Attributes
+     - Added script Declarations and Aliases
+     - Added template name and template revision number to each top level XML
+ </history>
+</member>
+<member name="T:aaGRToolKit.aaTemplateData.aaTemplate">
+ <summary>
+ The template itself. Contains scripts, field attributes, and user defined attributes.
+ </summary>
+</member>
+<member name="T:aaGRToolKit.aaTemplateData.aaFieldAttributeDiscrete">
+ <summary>
+ Discrete Field Attribute data structure.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="T:aaGRToolKit.aaTemplateData.aaFieldAttributeAnalog">
+ <summary>
+ Analog Field Attribute data structure.
+ </summary>
+</member>
+<member name="T:aaGRToolKit.aaTemplateExtract">
+ <summary>
+ The aaTemplateExtract class interfaces with GRAccess to connect, collect, and parse data from the Galaxy.
+ All the hard work is in this class, but aaTemplateData contains the actual data structure.
+ </summary>
+</member>
+<member name="M:aaGRToolKit.aaTemplateExtract.#ctor">
+ <summary>
+ Initializes and sets up our GRAccess client app.
+ </summary>
+</member>
+<member name="M:aaGRToolKit.aaTemplateExtract.getGalaxies(System.String)">
+ <summary>
+ Queries for all the galaxy names on this node.
+ </summary>
+ <param name="NodeName">The node name as a string (e.g. "localhost").</param>
+ <returns>A collection of galaxy names as strings.</returns>
+</member>
+<member name="M:aaGRToolKit.aaTemplateExtract.setGalaxy(System.Object)">
+ <summary>
+ Given a Galaxy Name, sets our Client to that Galaxy.
+ </summary>
+ <param name="galaxyName">A string that is the Galaxy name.</param>
+ <returns>Nothing</returns>
+</member>
+<member name="M:aaGRToolKit.aaTemplateExtract.getAuthType">
+ <summary>
+ Determines what authentication type is required for this Galaxy.
+ </summary>
+ <returns>The authentication mode.</returns>
+ <remarks>Not currently working.</remarks>
+</member>
+<member name="M:aaGRToolKit.aaTemplateExtract.login(System.Object,System.Object)">
+ <summary>
+ Tries to login to the Galaxy.
+ </summary>
+ <param name="user">User name, include Domain (e.g. "Domain\user") if authenticating against a domain.</param>
+ <param name="password">Password</param>
+ <returns>Status of login attempt.</returns>
+</member>
+<member name="M:aaGRToolKit.aaTemplateExtract.getTemplates(System.Boolean)">
+ <summary>
+ Discovers all of the templates in this Galaxy.
+ </summary>
+ <param name="HideBaseTemplates">If set, will not return the base templates that are in every Galaxy.</param>
+ <returns>A collection of strings with the template names listed.</returns>
+ <remarks>Does not return instances or checked in templates.</remarks>
+</member>
+<member name="M:aaGRToolKit.aaTemplateExtract.getTemplateData(System.String)">
+ <summary>
+ This is the master function that is initiated for each template. Sub-functions will gather all of the attributes and scripts.
+ </summary>
+ <param name="TemplateName">The template name that is desired to get data from.</param>
+ <returns>An aaTemplate class of all of the template data (scripts, UDAs, field attributes).</returns>
+</member>
+<member name="M:aaGRToolKit.aaTemplateExtract.GetFieldAttributesDiscrete(aaGRAccess.IAttributes)">
+ <summary>
+ Gets all of the Discrete Field Attributes for a given template. 
+ </summary>
+ <param name="gAttributes">All of the Configurable Attributes that were found for this template.</param>
+ <returns>A collection of all of the Discrete Field Attributes using the aaFieldAttributeDiscrete class.</returns>
+ <remarks></remarks>
+</member>
+<member name="M:aaGRToolKit.aaTemplateExtract.GetFieldAttributesAnalog(aaGRAccess.IAttributes)">
+ <summary>
+ Gets all of the Analog Field Attributes for a given template. 
+ </summary>
+ <param name="gAttributes">All of the Configurable Attributes that were found for this template.</param>
+ <returns>A collection of all of the Analog Field Attributes using the aaFieldAttributeAnalog class.</returns>
+ <remarks></remarks>
+</member>
+<member name="M:aaGRToolKit.aaTemplateExtract.GetAttrBoolean(System.String,aaGRAccess.IAttributes)">
+ <summary>
+ Since the attribute may not exist, need to provide a safe, concise way to get it without crashing the program.
+ </summary>
+ <param name="AttributeName">The Attribute Name that exists in the template.</param>
+ <param name="gAttributes">All of the Configurable Attributes that were found for this template.</param>
+ <returns>Either the value of the Attribute or a boolean false.</returns>
+ <remarks></remarks>
+</member>
+<member name="M:aaGRToolKit.aaTemplateExtract.GetAttrString(System.String,aaGRAccess.IAttributes)">
+ <summary>
+ Since the attribute may not exist, need to provide a safe, concise way to get it without crashing the program.
+ </summary>
+ <param name="AttributeName">The Attribute Name that exists in the template.</param>
+ <param name="gAttributes">All of the Configurable Attributes that were found for this template.</param>
+ <returns>Either the value of the Attribute or a blank string.</returns>
+ <remarks></remarks>
+</member>
+<member name="M:aaGRToolKit.aaTemplateExtract.GetAttrInteger(System.String,aaGRAccess.IAttributes)">
+ <summary>
+ Since the attribute may not exist, need to provide a safe, concise way to get it without crashing the program.
+ </summary>
+ <param name="AttributeName">The Attribute Name that exists in the template.</param>
+ <param name="gAttributes">All of the Configurable Attributes that were found for this template.</param>
+ <returns>Either the value of the Attribute or a zero.</returns>
+ <remarks></remarks>
+</member>
+</members>
+</doc>

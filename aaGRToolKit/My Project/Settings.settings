@@ -1,0 +1,51 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="AloneAttributes" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Cfg_CodigoObjeto|Tag,Cfg_DescObjeto|Cfg_DescObjeto,Cfg_NumeroSensor|</Value>
+    </Setting>
+    <Setting Name="ArrayAttributes" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Cfg_Mapeado|Field Attribute</Value>
+    </Setting>
+    <Setting Name="InstanceNameIndex" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Instancia</Value>
+    </Setting>
+    <Setting Name="InstanceTemplateIndex" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Template</Value>
+    </Setting>
+    <Setting Name="CSVTAGS" Type="System.String" Scope="User">
+      <Value Profile="(Default)">SEÑALES (Tags en el driver)</Value>
+    </Setting>
+    <Setting Name="CSVDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)">DIRECCION PLC</Value>
+    </Setting>
+    <Setting Name="InstanceEngUnits1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Field Attribute</Value>
+    </Setting>
+    <Setting Name="InstanceEngUnits2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Unidades</Value>
+    </Setting>
+    <Setting Name="UDAInt1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="ScriptInt1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">3, 4, 5</Value>
+    </Setting>
+    <Setting Name="AnalogLockedAttr" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.ConversionMode, .HiHi.Priority, .Hi.Priority, .Lo.Priority, .LoLo.Priority, .HiHi.DescAttrName, .Hi.DescAttrName, .Lo.DescAttrName, .LoLo.DescAttrName, .LevelAlarm.ValueDeadband, .LevelAlarm.TimeDeadband</Value>
+    </Setting>
+    <Setting Name="DiscreteLockedAttr" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.ActiveAlarmState, .DescAttrName, .BooleanAlarm.TimeDeadBand, .Category</Value>
+    </Setting>
+    <Setting Name="SettingPrueba" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Nombre|1||2|||;Descripcion|1||4,5|.Desc||;AccessMode|3|Input,InputOutput,Output|3|.AccessMode||;Historizado|2||12,13|.Historized||;Evento|2||6,7|.LogDataChangeEvent||;State Labels|4|Label False,Label True|8,9|.UseOffOnMsg|.OffMsg,.OnMsg|10,11;Alarma|4|Prioridad|14,15|.Alarmed|.Priority|16;</Value>
+    </Setting>
+    <Setting Name="SettingPrueba1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Nombre|1||2|||;Descripcion|1||4,5|.Desc||;Unidad|1||8,12|.EngUnits||;AccessMode|3|Input,InputOutput,Output|3|.AccessMode||;Data Type|3|Integer,Float,Double|3|.AnalogType||;Historizado|2||18,19|.Historized||;Evento|2||6,7|.LogDataChangeEvent||;IO Scalling|4|Raw Min,Raw Max,EU Min,Eu Max,EU Range Min,EU Range Max|10,11|.Scaled|.RawMin,.RawMax,.EngUnitsMin,.EngUnitsMax,.EngUnitsRangeMin,.EngUnitsRangeMax|12,15,13,16,14,17;Limit Alarms|4|HiHi,Hi,Lo,LoLo|20,21|.LevelAlarmed|.HiHi.Limit,.Hi.Limit,.Lo.Limit,.LoLo.Limit|22,24,26,28;</Value>
+    </Setting>
+    <Setting Name="LastGalaxy" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,282 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+aaGRToolKit
+</name>
+</assembly>
+<members>
+<member name="T:aaGRToolKit.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:aaGRToolKit.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:aaGRToolKit.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="T:aaGRToolKit.aaTemplateData">
+ <summary>
+ Stores ArchestrA Galaxy template data in an XML serializable format.
+ </summary>
+</member>
+<member name="F:aaGRToolKit.aaTemplateData.SchemaVersion">
+ <summary>
+ The current XML schema version. This is useful in exports to determine 
+ if data may be missing from an older version export.
+ </summary>
+</member>
+<member name="T:aaGRToolKit.aaTemplateData.aaTemplate">
+ <summary>
+ The template itself. Contains scripts, field attributes, and user defined attributes.
+ </summary>
+</member>
+<member name="T:aaGRToolKit.aaTemplateData.aaFieldAttributeDiscrete">
+ <summary>
+ Discrete Field Attribute data structure.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="T:aaGRToolKit.aaTemplateData.aaFieldAttributeAnalog">
+ <summary>
+ Analog Field Attribute data structure.
+ </summary>
+</member>
+<member name="T:aaGRToolKit.aaGalaxyTools">
+ <summary>
+ The aaTemplateExtract class interfaces with GRAccess to connect, collect, and parse data from the Galaxy.
+ All the hard work is in this class, but aaTemplateData contains the actual data structure.
+ </summary>
+</member>
+<member name="M:aaGRToolKit.aaGalaxyTools.#ctor">
+ <summary>
+ Initializes and sets up our GRAccess client app.
+ </summary>
+</member>
+<member name="M:aaGRToolKit.aaGalaxyTools.getGalaxies(System.String)">
+ <summary>
+ Queries for all the galaxy names on this node.
+ </summary>
+ <param name="NodeName">The node name as a string (e.g. "localhost").</param>
+ <returns>A collection of galaxy names as strings.</returns>
+</member>
+<member name="M:aaGRToolKit.aaGalaxyTools.GalaxyImport(System.String,System.Boolean)">
+ <summary>
+ Importa objetos a la galaxia desde un archivo especificado.
+ </summary>
+ <param name="FileInfo">Ruta completa del archivo a importar.</param>
+ <param name="Overwrite">Indica si se deben sobrescribir los objetos existentes.</param>
+ <returns>Lista de mensajes que indican el resultado de la importación, 
+ incluyendo éxito, advertencias, errores o excepciones.</returns>
+</member>
+<member name="M:aaGRToolKit.aaGalaxyTools.setGalaxy(System.Object)">
+ <summary>
+ Given a Galaxy Name, sets our Client to that Galaxy.
+ </summary>
+ <param name="galaxyName">A string that is the Galaxy name.</param>
+ <returns>Nothing</returns>
+</member>
+<member name="M:aaGRToolKit.aaGalaxyTools.login(System.Object,System.Object)">
+ <summary>
+ Tries to login to the Galaxy.
+ </summary>
+ <param name="user">User name, include Domain (e.g. "Domain\user") if authenticating against a domain.</param>
+ <param name="password">Password</param>
+ <returns>Status of login attempt.</returns>
+</member>
+<member name="M:aaGRToolKit.aaGalaxyTools.getTemplates(System.Boolean)">
+ <summary>
+ Discovers all of the templates in this Galaxy.
+ </summary>
+ <param name="HideBaseTemplates">If set, will not return the base templates that are in every Galaxy.</param>
+ <returns>A collection of strings with the template names listed.</returns>
+ <remarks>Does not return instances or checked in templates.</remarks>
+</member>
+<member name="M:aaGRToolKit.aaGalaxyTools.getTemplateData(System.String)">
+ <summary>
+ This is the master function that is initiated for each template. Sub-functions will gather all of the attributes and scripts.
+ </summary>
+ <param name="TemplateName">The template name that is desired to get data from.</param>
+ <returns>An aaTemplate class of all of the template data (scripts, UDAs, field attributes).</returns>
+</member>
+<member name="M:aaGRToolKit.aaGalaxyTools.CreateTemplate(System.String,System.String,System.Collections.Generic.List{aaGRToolKit.aaTemplateData.aaNewField},System.Collections.Generic.List{aaGRToolKit.aaTemplateData.aaNewField},System.Collections.Generic.List{aaGRToolKit.aaTemplateData.aaNewField},System.Collections.Generic.List{aaGRToolKit.aaTemplateData.aaNewField},System.Collections.Generic.List{System.String[]})">
+ <summary>
+ Crea una nueva plantilla en la galaxia basada en una plantilla existente y le asigna atributos personalizados.
+ </summary>
+ <param name="TemplateName">Nombre de la plantilla base desde la cual se clonará la nueva plantilla.</param>
+ <param name="NewTemplateName">Nombre de la nueva plantilla que se creará.</param>
+ <param name="DiscAttrList">Lista de atributos digitales (discretos) que se agregarán a la nueva plantilla.</param>
+ <param name="AnalogAttrList">Lista de atributos analógicos que se agregarán a la nueva plantilla.</param>
+ <param name="ScriptList">Lista de scripts que se asignarán a la nueva plantilla.</param>
+ <param name="UDAList">Lista de atributos definidos por el usuario (UDA) que se asignarán a la plantilla.</param>
+ <param name="List">Lista de arrays de strings con parámetros adicionales utilizados por la función AddNewTemAttr.</param>
+ <remarks>
+ La función verifica si el usuario está logueado en la galaxia antes de realizar operaciones.
+ En caso de error (por ejemplo, plantilla base no encontrada), se informa en el log de la interfaz.
+ </remarks>
+</member>
+<member name="M:aaGRToolKit.aaGalaxyTools.CreateInstance(System.String,System.String,System.String,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.String[],System.String[],System.String[])">
+ <summary>
+ Crea una nueva instancia en la galaxia a partir de una plantilla existente, asignándole atributos personalizados y una ubicación (área).
+ </summary>
+ <param name="TemplateName">Nombre de la plantilla base desde la que se generará la instancia.</param>
+ <param name="InstanceName">Nombre que se asignará a la nueva instancia creada.</param>
+ <param name="AreaName">Nombre del área de la galaxia donde se ubicará la instancia.</param>
+ <param name="LoneAttrText">Lista de valores para atributos individuales que se deben asignar a la instancia.</param>
+ <param name="ArrayAttrText">Lista de valores para atributos tipo array que se deben asignar a la instancia.</param>
+ <param name="AloneAttributes">Arreglo de nombres de los atributos individuales que se configurarán.</param>
+ <param name="arrayAttributes">Arreglo de nombres de los atributos tipo array que se configurarán.</param>
+ <param name="EngUnits">Arreglo de unidades de ingeniería asociadas a los atributos (si aplica).</param>
+ <remarks>
+ La función requiere que el usuario esté autenticado (loggedIn = True). 
+ En caso de error (como plantilla no encontrada o no autenticado), se muestra un mensaje descriptivo.
+ Llama internamente a la función EditarCfg para configurar los atributos en la nueva instancia.
+ </remarks>
+</member>
+<member name="M:aaGRToolKit.aaGalaxyTools.deployUndeployInstance(System.String,System.Boolean,System.Int32)">
+ <summary>
+ Despliega o retira el despliegue (undeploy) de una instancia dentro de la galaxia, según el modo especificado.
+ </summary>
+ <param name="InstanceName">Nombre de la instancia que se desea desplegar o retirar.</param>
+ <param name="Cascade">Indica si la acción debe aplicarse de forma recursiva (en cascada) a objetos relacionados.</param>
+ <param name="mode">
+ Modo de operación:
+ 1 = Undeploy (retirar despliegue),
+ Cualquier otro valor = Deploy (desplegar instancia).
+ </param>
+ <remarks>
+ Requiere que el usuario esté autenticado previamente (loggedIn = True).
+ La función consulta la instancia por nombre y realiza la acción correspondiente.
+ En caso de error o instancia no encontrada, se muestra un mensaje descriptivo.
+ </remarks>
+</member>
+<member name="M:aaGRToolKit.aaGalaxyTools.AgregarElementosACfgMapeado(aaGRAccess.IAttributes,System.String[],System.String)">
+ <summary>
+ Asigna un conjunto de valores a un atributo array del tipo <c>Cfg_Mapeado</c> en ArchestrA.
+ </summary>
+ <param name="gAttributes">Colección de atributos de la instancia en la que se desea modificar el array.</param>
+ <param name="valores">Arreglo de strings que contiene los valores a insertar en el atributo array.</param>
+ <param name="ArrayAttributes">Nombre del atributo array que se desea modificar.</param>
+ <remarks>
+ - Se admite un máximo de 50 elementos; si hay menos, se completa con cadenas vacías.
+ - Si un valor es <c>null</c> o vacío, se inserta una cadena vacía en su lugar.
+ - Los índices del array son 1-based según el estándar de ArchestrA.
+ - Registra el resultado o cualquier error en el LogBox principal de la aplicación.
+ </remarks>
+</member>
+<member name="M:aaGRToolKit.aaGalaxyTools.EditarCfg(System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},aaGRAccessApp.IInstance,System.String[],System.String[],System.String[])">
+ <summary>
+ Actualiza los atributos configurables, arrays y unidades de ingeniería de una instancia dada.
+ </summary>
+ <param name="Aloneattr">Lista de valores individuales para atributos simples.</param>
+ <param name="arrayeattr">Lista de cadenas que contienen valores separados por líneas para atributos tipo array.</param>
+ <param name="Instance">Instancia de ArchestrA que se va a modificar.</param>
+ <param name="ConfigurableAttr">Arreglo con los nombres de atributos simples a actualizar.</param>
+ <param name="ArrayAttributes">Arreglo con los nombres de atributos tipo array a actualizar.</param>
+ <param name="EngUnits">Arreglo con valores de unidades de ingeniería para actualizar atributos específicos.</param>
+ <remarks>
+ - Utiliza las funciones <c>ToMxValue</c>, <c>AgregarElementosACfgMapeado</c> y <c>ToMxValueEngUnits</c> para establecer los valores.
+ - Guarda y hace check-in de la instancia al finalizar.
+ - Cualquier excepción se registra en el LogBox principal.
+ </remarks>
+</member>
+<member name="M:aaGRToolKit.aaGalaxyTools.GetFieldAttributesAnalog(aaGRAccess.IAttributes)">
+ <summary>
+ Gets all of the Analog Field Attributes for a given template. 
+ </summary>
+ <param name="gAttributes">All of the Configurable Attributes that were found for this template.</param>
+ <returns>A collection of all of the Analog Field Attributes using the aaFieldAttributeAnalog class.</returns>
+ <remarks></remarks>
+</member>
+<member name="M:aaGRToolKit.aaGalaxyTools.GetFieldAttributesDiscrete(aaGRAccess.IAttributes)">
+ <summary>
+ Gets all of the Discrete Field Attributes for a given template. 
+ </summary>
+ <param name="gAttributes">All of the Configurable Attributes that were found for this template.</param>
+ <returns>A collection of all of the Discrete Field Attributes using the aaFieldAttributeDiscrete class.</returns>
+ <remarks></remarks>
+</member>
+<member name="M:aaGRToolKit.aaGalaxyTools.getTemplateAttributes(System.String)">
+ <summary>
+ Obtiene una lista de nombres de atributos configurables para una plantilla dada.
+ </summary>
+ <param name="templatename">Nombre de la plantilla a consultar.</param>
+ <returns>
+ Lista de cadenas con los nombres de los atributos configurables de la plantilla.
+ Si la plantilla no existe, devuelve una lista con el valor "BadTemplate".
+ Si no se ha iniciado sesión, devuelve una lista con "NotLoggedIn".
+ En caso de error, devuelve una lista con "Error".
+ </returns>
+ <remarks>
+ - Filtra atributos cuyos nombres comienzan con "Scr_" o "Src_".
+ - Utiliza la API de ArchestrA para consultar los objetos y sus atributos.
+ - Muestra un mensaje de error en un MessageBox si ocurre una excepción.
+ </remarks>
+</member>
+<member name="M:aaGRToolKit.aaGalaxyTools.AddNewTemAttr(aaGRAccessApp.ITemplate,System.Collections.Generic.List{aaGRToolKit.aaTemplateData.aaNewField},System.Collections.Generic.List{aaGRToolKit.aaTemplateData.aaNewField},System.Collections.Generic.List{aaGRToolKit.aaTemplateData.aaNewField},System.Collections.Generic.List{aaGRToolKit.aaTemplateData.aaNewField},System.Collections.Generic.List{System.String[]})">
+ <summary>
+ Agrega nuevos atributos a una plantilla dada, incluyendo atributos discretos, analógicos, scripts y UDA.
+ </summary>
+ <param name="newTemplate">La plantilla (ITemplate) a la que se agregarán los atributos.</param>
+ <param name="DiscAttrList">Lista de atributos discretos a agregar.</param>
+ <param name="AnalogAttrList">Lista de atributos analógicos a agregar.</param>
+ <param name="ScriptList">Lista de atributos de tipo script a agregar.</param>
+ <param name="UDAList">Lista de atributos definidos por el usuario (UDA) a agregar.</param>
+ <param name="List">Lista de arreglos de cadenas que contiene parámetros para la creación de nuevos Field Attributes.</param>
+ <remarks>
+ - Realiza un CheckOut de la plantilla antes de modificarla y un CheckIn al finalizar.
+ - El orden de creación de UDA, atributos discretos y analógicos es importante para evitar errores.
+ - Actualiza atributos XML específicos como 'UserAttrData' y 'Extensions' con los nuevos atributos.
+ - Guarda la plantilla varias veces para asegurar la correcta aplicación de cambios.
+ </remarks>
+</member>
+<member name="M:aaGRToolKit.aaGalaxyTools.createNewFA(aaGRAccessApp.ITemplate,aaGRToolKit.aaTemplateData.aaNewField,System.String[],System.String[])">
+ <summary>
+ Crea y configura un nuevo Field Attribute (FA) en la plantilla dada.
+ </summary>
+ <param name="NewTemplate">La plantilla (ITemplate) donde se agregarán los atributos.</param>
+ <param name="FA">Objeto que representa el nuevo atributo a crear, contiene nombre y valores.</param>
+ <param name="TextBoxAttributes">Arreglo de sufijos de atributos que se configurarán con valores del atributo FA.</param>
+ <param name="GroupBoxBlockAttributes">Arreglo de sufijos de atributos que serán bloqueados (locked) tras su configuración.</param>
+ <remarks>
+ - Para cada sufijo en TextBoxAttributes, configura el atributo correspondiente concatenando el nombre base y el sufijo.
+ - Se realiza una conversión de tipos a través de DataTypeConversion para asignar valores correctamente.
+ - Configura atributos relacionados con Input/Output según el valor asignado.
+ - Para el atributo ".LevelAlarmed", activa algunos atributos específicos de alarma.
+ - Bloquea los atributos indicados en GroupBoxBlockAttributes para evitar modificaciones posteriores.
+ </remarks>
+</member>
+<member name="M:aaGRToolKit.aaGalaxyTools.createNewUDA(aaGRAccessApp.ITemplate,System.String,System.String)">
+ <summary>
+ Crea un nuevo User Defined Attribute (UDA) en la plantilla y le asigna un valor inicial.
+ </summary>
+ <param name="template">Plantilla donde se añadirá el UDA.</param>
+ <param name="UDAName">Nombre del nuevo UDA.</param>
+ <param name="UDAValue">Valor inicial que se asignará al UDA.</param>
+</member>
+<member name="M:aaGRToolKit.aaGalaxyTools.DataTypeConversion(aaGRAccessApp.IAttribute,System.String)">
+ <summary>
+ Realiza la conversión del valor proporcionado a un tipo de dato compatible con el atributo COM recibido 
+ y lo asigna al mismo, aplicando bloqueo si es necesario.
+ </summary>
+ <param name="Attr">Objeto IAttribute que recibirá el valor convertido y el estado de bloqueo.</param>
+ <param name="ValueString">
+ Cadena de entrada con el formato "Valor|Locked", donde:
+ - "Valor" representa el contenido a convertir según el tipo de dato del atributo.
+ - "Locked" (opcional) puede ser "True" o "False" para indicar si el atributo debe ser bloqueado después.
+ </param>
+ <remarks>
+ Esta función maneja múltiples tipos de datos: MxString, MxInternationalizedString, MxInteger,
+ MxDouble, MxBoolean, MxReferenceType, MxQualifiedEnum y MxBigString.
+ También maneja errores silenciosamente mediante Debug.WriteLine.
+ </remarks>
+</member>
+</members>
+</doc>
